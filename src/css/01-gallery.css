@@ -1,3 +1,4 @@
+/* @import '' */
 :root {
   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   --animation-duration: 250ms;
@@ -39,4 +40,8 @@
 
 .gallery__link:hover {
   cursor: zoom-in;
+}
+
+.sl-image .sl-caption.pos-bottom.gallery__captionClass {
+  background: rgba(0, 0, 0, 0.3);
 }
