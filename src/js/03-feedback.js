@@ -1,3 +1,5 @@
+import throttle from 'lodash.throttle';
+
 const refs = {
   form: document.querySelector('.feedback-form'),
 };
@@ -8,13 +10,11 @@ const formMesage = refs.form.querySelector('textArea');
 const FORM_STATE = 'feedback-form-state';
 
 const getLocalStorageForm = () => {
+  let readStorage = { email: '', message: '' };
   if (localStorage.getItem(FORM_STATE)) {
-    const readStorage = JSON.parse(localStorage.getItem(FORM_STATE));
-    readStorage.email = readStorage.email ? readStorage.email : '';
-    readStorage.message = readStorage.message ? readStorage.message : '';
-    return readStorage;
+    readStorage = { ...JSON.parse(localStorage.getItem(FORM_STATE)) };
   }
-  return { email: '', message: '' };
+  return readStorage;
 };
 
 const setLocalStorageForm = e => {
@@ -33,17 +33,16 @@ const formInit = form => {
 const onSubmitBtn = e => {
   e.preventDefault();
   // console.log(e.target);
+  console.log(formData);
   refs.form.reset();
   localStorage.removeItem(FORM_STATE);
-  console.log('after submit formData: ', formData);
-  formData.email = '';
-  formData.message = '';
+  formData = { ...getLocalStorageForm() };
 };
 
 //read formData from LocalStorage
-const formData = getLocalStorageForm();
+let formData = getLocalStorageForm();
 //write from FormDafda to form
 formInit(formData);
 
-refs.form.addEventListener('input', setLocalStorageForm);
+refs.form.addEventListener('input', throttle(setLocalStorageForm, 500));
 refs.form.addEventListener('submit', onSubmitBtn);
