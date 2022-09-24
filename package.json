@@ -2,9 +2,9 @@
   "name": "goit-js-hw-08",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://NilKad.github.io/goit-js-hw-08/",
+  "homepage": "https://nilkad.github.io/goit-js-hw-08",
   "scripts": {
-    "start": "parcel src/*.html --open",
+    "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /goit-js-hw-08/"
   },
   "repository": {
